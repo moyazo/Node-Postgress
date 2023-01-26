@@ -1,12 +1,12 @@
 'use strict'
 const express = require('express');
 const bodyParse = require('body-parser');
+const dotenv = require('dotenv');
 const app = express();
 const roverRoutes = require('./src/routes/roverRoutes.js')
 const userRoutes = require('./src/routes/userRoutes.js')
-// const dotenv = require('dotenv');
 const connectToDb  = require('./app/services/dbSync.js');
-// dotenv.config();
+dotenv.config();
 
 const runApp = async () => {
     app.use(bodyParse.json());
