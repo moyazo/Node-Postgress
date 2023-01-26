@@ -1,0 +1,29 @@
+{
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^6.9.0",
+    "node": "^19.4.0",
+    "nodemon": "^2.0.20"
+  },
+  "name": "mongo_node",
+  "description": "Node+MongoDb+NasaApi",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/moyazo/Node-MongoDb.git"
+  },
+  "author": "Manuel Moya",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/moyazo/Node-MongoDb/issues"
+  },
+  "homepage": "https://github.com/moyazo/Node-MongoDb#readme"
+}
