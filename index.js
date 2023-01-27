@@ -3,9 +3,11 @@ const express = require('express');
 const bodyParse = require('body-parser');
 const dotenv = require('dotenv');
 const app = express();
+const authRoutes = require('./src/routes/authRoutes.js')
 const roverRoutes = require('./src/routes/roverRoutes.js')
 const userRoutes = require('./src/routes/userRoutes.js')
 const connectToDb  = require('./app/services/dbSync.js');
+const { confirmAuth } = require('./middelware/authMiddleWare.js')
 dotenv.config();
 
 const runApp = async () => {
@@ -14,9 +16,11 @@ const runApp = async () => {
         extended: true
     }));
 
+    app.use(confirmAuth);
+    app.use('/auth',authRoutes);
     app.use('/NasaApi',roverRoutes);
     app.use('/users',userRoutes);
-    // app.use('/auth',nasaRoutes);
+ 
     
     try {
         await connectToDb();

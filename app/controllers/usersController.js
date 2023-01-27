@@ -21,7 +21,7 @@ const getUserById = async (id) => {
  * @returns User
  */
 const getUserByEmail = async (email) => {
-    return User.findById(email);
+    return User.find({email: email});
 }
 /**
  * Description

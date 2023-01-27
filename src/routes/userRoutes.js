@@ -7,6 +7,7 @@ require('../../app/controllers/usersController');
 
 router.get('/all-users', async (req,res) => {
    try {
+    console.log('hola')
     const allUsers = await getAllUsers();
     if(!allUsers)
         res.status(502).json('ERROR AT BRING DATA');
