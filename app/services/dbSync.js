@@ -1,6 +1,9 @@
 'use strict'
 // REQUIRES
 const mongoose = require('mongoose');
+/**
+ * *Description* connectToDb() is a function that connect with our mongo DB.
+ */
 const connectToDb = async () =>{ // CONNECTED TO DB WITH MONGOOSE
     try {
         console.log('CONNECTING TO nasa_db');

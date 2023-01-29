@@ -2,12 +2,14 @@
 const { response } = require('express');
 const Rover = require('../models/roverModel.js')
 const { creatRover } = require('../controllers/roversController.js')
+/**
+ * *Description* getDataFromApi() is a function that bring data from our Nasa api.
+ */
 async function getDataFromApi () {
     try {
         console.log('ESPERANDO RESPUESTA DE ApiNasa');
         const response = await fetch('https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=1000&api_key=gq1H9aAzvLDgCepccfLr2i9Jxxz2yCo0oMeVspdf');
         const data = await response.json();
-        // console.log(data)
         const DataFromDb = await Rover.find();
         const itemsToCreate = [];
         for (let i = 0; i < 10; i++) {                

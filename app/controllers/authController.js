@@ -10,9 +10,9 @@ const saltRounds = 10;
  * @param {String} password}
  * @returns String
  */
-const signUp = async ({ email,password,saltRounds }) => {
+const signUp = async ({ email,password }) => {
     const userByEmail = await getUserByEmail(email);
-    if(!userByEmail)
+    if(userByEmail)
         throw new Error('USER ALREADY IN USE...');
 
         const salt = await bcrypt.genSalt(saltRounds);
@@ -33,7 +33,7 @@ const singIn = async ({ email,password }) => {
     if(!userByEmail) // CHECK USER EXIST
         throw new Error('USER NOT FOUND');
         
-    const match = await bcrypt.compare(password,userByEmail[0].password); // CAPARING HASHED PASSWORDS
+    const match = await bcrypt.compare(password,userByEmail.password); // CAPARING HASHED PASSWORDS
     if(!match) // CHECK COMPARATION
         throw new Error('WRONG PASSWORD')
        

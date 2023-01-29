@@ -23,7 +23,7 @@ router.get('/all-users', async (req,res) => {
 
 router.get('/user/:userId', async (req,res) => {
     try {
-     const user = await getUserById(req.params.id);
+     const user = await getUserById(req.params.userId);
      if(!user)
          res.status(502).json('ERROR AT BRING DATA');
      else{
@@ -51,7 +51,7 @@ router.get('/user/:userId', async (req,res) => {
 
  router.put('/changeUser/:userId', async (req,res) => {
     try {
-     const UserToChange = await updateUser(req.body);
+     const UserToChange = await updateUser(req.params.userId,req.body);
      if(!UserToChange)
          res.status(502).json('ERROR AT UPDATE DATA');
      else{
@@ -63,7 +63,7 @@ router.get('/user/:userId', async (req,res) => {
      } 
  })
 
- router.put('/remove/:userId', async (req,res) => {
+ router.delete('/remove/:userId', async (req,res) => {
     try {
      const UserToDelete = await removeUser(req.params.id);
      if(!UserToDelete)

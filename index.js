@@ -9,19 +9,19 @@ const userRoutes = require('./src/routes/userRoutes.js')
 const connectToDb  = require('./app/services/dbSync.js');
 const { confirmAuth } = require('./middelware/authMiddleWare.js')
 dotenv.config();
-
+/**
+ * *Description* runApp() is the function that will start up our App
+ */
 const runApp = async () => {
     app.use(bodyParse.json());
     app.use(bodyParse.urlencoded({
         extended: true
     }));
-
     app.use(confirmAuth);
     app.use('/auth',authRoutes);
     app.use('/NasaApi',roverRoutes);
     app.use('/users',userRoutes);
- 
-    
+
     try {
         await connectToDb();
         app.listen(8000, () => {
