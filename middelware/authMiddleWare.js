@@ -30,7 +30,7 @@ const confirmAuth =  async (req, res, next) => { // CHECK IF USER IS LOGGED. IF 
     if(!user)
         res.status(403).json('WRONG AUTH TOKEN');
 
-    req.user = {id: user._id, email: user.email};
+    req.user = {id: user.id, email: user.email};
     return next();
 }
 // EXPORTS

@@ -5,7 +5,7 @@ const User = require('../models/userModel.js');
  * @returns User
  */
 const getAllUsers = async () => {
-    return User.find();
+    return User.findAll();
 }
 /**
  * Description
@@ -13,7 +13,7 @@ const getAllUsers = async () => {
  * @returns User
  */
 const getUserById = async (id) => {
-    return User.findById(id);
+    return User.findByPk(id);
 }
 /**
  * Description
@@ -21,7 +21,13 @@ const getUserById = async (id) => {
  * @returns User
  */
 const getUserByEmail = async (email) => {
-    return User.findOne({email});
+    return User.findOne(
+        {
+            where :{
+                email
+            }
+        }
+    );
 }
 /**
  * Description
@@ -29,7 +35,7 @@ const getUserByEmail = async (email) => {
  * @returns void
  */
 const createUser  = async (user) => {
-    return User(user).save();
+    return User.create({user});
 }
 /**
  * Description
@@ -38,7 +44,11 @@ const createUser  = async (user) => {
  * @returns User
  */
 const updateUser = async (id, data) => { 
-    return User.findById(id).updateOne(data);
+    return User.update(data,{
+        where:{
+            id
+        }
+    });;
 }
 /**
  * Description
@@ -46,7 +56,12 @@ const updateUser = async (id, data) => {
  * @returns Boolean
  */
 const removeUser = async (id) => { // DELETE ENTITY
-    await User.findById(id).deleteOne()
+    await User.destroy({
+            where:{
+                id
+            }
+        }
+    );
     return true
 }
 

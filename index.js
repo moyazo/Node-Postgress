@@ -6,7 +6,7 @@ const app = express();
 const authRoutes = require('./src/routes/authRoutes.js')
 const roverRoutes = require('./src/routes/roverRoutes.js')
 const userRoutes = require('./src/routes/userRoutes.js')
-const connectToDb  = require('./app/services/dbSync.js');
+const sequelize  = require('./app/services/dbSync.js');
 const { confirmAuth } = require('./middelware/authMiddleWare.js')
 dotenv.config();
 /**
@@ -23,7 +23,7 @@ const runApp = async () => {
     app.use('/users',userRoutes);
 
     try {
-        await connectToDb();
+        await sequelize.sync({force: true});
         app.listen(8000, () => {
             console.log('App started...' + 8000);
         })

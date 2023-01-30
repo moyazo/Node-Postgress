@@ -5,7 +5,7 @@ const Rover = require('../models/roverModel.js');
  * @returns Rover
  */
 const getAllRovers = async () => {
-    return Rover.find();
+    return Rover.findAll();
 }
 /**
  * Description
@@ -13,7 +13,7 @@ const getAllRovers = async () => {
  * @returns Rover
  */
 const getRoverById = async (id) => {
-    return Rover.findById(id);
+    return Rover.findByPk(id);
 }
 /**
  * Description
@@ -21,7 +21,7 @@ const getRoverById = async (id) => {
  * @returns void
  */
 const createRover  = async (rover) => {
-    return Rover(rover).save();
+    return Rover.create({rover});
 }
 /**
  * Description
@@ -30,7 +30,11 @@ const createRover  = async (rover) => {
  * @returns Rover
  */
 const updateRover = async (id, data) => { 
-    return Rover.findById(id).updateOne(data);
+    return Rover.update(data,{
+        where:{
+            id
+        }
+    });
 }
 /**
  * Description
@@ -38,7 +42,12 @@ const updateRover = async (id, data) => {
  * @returns Boolean
  */
 const removeRover = async (id) => { // DELETE ENTITY
-    await Rover.findById(id).deleteOne()
+    await Rover.destroy({
+            where:{
+                id
+            }
+        }
+    );
     return true
 }
 

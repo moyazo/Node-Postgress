@@ -4,9 +4,19 @@ const router = require('express').Router();
 const getDataFromApi  = require('../../app/services/nasaSync.js');
 const Rover = require('../../app/models/roverModel.js');
 const { getAllRovers, getRoverById, createRover, updateRover, removeRover} = require('../../app/controllers/roversController.js');
-let count = 0;
-count++;
-if(count === 1) getDataFromApi();
+
+router.get('/sync-api', async (req,res) => {
+    try {    
+        const apiData = getDataFromApi();
+        if(!apiData)
+            res.status(502).json('ERROR AT BRING DATA');
+        else{
+            res.status(200).json('BRINGING ROVERS...');
+    }
+     } catch (error) {
+         res.status(500).json('SERVER ERROR 500..')
+     } 
+ })
 /**
  * * Description*  This route allow us the access of all rovers.
  * @param {Request} req

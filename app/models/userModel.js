@@ -1,28 +1,25 @@
 'use strict'
-const mongoose = require('mongoose');
-const userSchema = new mongoose.Schema({
-    "name": {
-        type: String
+const Sequelize = require('sequelize');
+const db = require('../services/dbSync')
+const userSchema = db.define('users',{
+    id: {
+        type: Sequelize.INTEGER,
+        autoIncrement: true,
+        allowNull: false,
+        primaryKey: true
     },
-    "email": {
-        type: String,
-        required: true,
-        unique: true,
-        lowercase: true,
-        trim: true
+    name: {
+        type: Sequelize.STRING,
     },
-    "password": {
-        type: String,
-        required: true
+    email: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        unique: true
     },
-    "salt": {
-        type: String,
-        required: true
-    },
-},{collection: 'users'});
-const User = mongoose.model(
-    'User',
-    userSchema
-    );
+    password: {
+        type: Sequelize.STRING,
+        allowNull: false,
+    }
+})
 
-module.exports = User;
+module.exports = userSchema;

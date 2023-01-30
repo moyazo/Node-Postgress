@@ -17,8 +17,7 @@ const signUp = async ({ email,password }) => {
 
         const salt = await bcrypt.genSalt(saltRounds);
         const hashedPs = await bcrypt.hash(password,salt);  
-        const user = new User({email, password: hashedPs, salt}); 
-        await user.save();
+        const user = await User.create({email, password: hashedPs, salt}); 
 
     return jwt.sign({email: user.email}, process.env.TOKEN_SECRET);
 }

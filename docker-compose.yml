@@ -2,8 +2,14 @@ version: '3.7'
 services:
   db:
     container_name: 'nasa_db'
-    image: mongo:4.0
+    image: postgres:13-alpine
+    environment:
+       POSTGRES_USER: 'postgres'
+       POSTGRES_DB: 'postgres'
+       POSTGRES_PASSWORD: 'postgres'
     ports:
-      - 27017:27017
+      - 5432:5432
     volumes:
-      - ~/data/mongodb:/data/db
+      - db-data:/var/lib/postgresql/data
+volumes:
+  db-data:
