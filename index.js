@@ -1,25 +1,29 @@
 'use strict'
 const express = require('express');
 const bodyParse = require('body-parser');
+const dotenv = require('dotenv');
 const app = express();
+const authRoutes = require('./src/routes/authRoutes.js')
 const roverRoutes = require('./src/routes/roverRoutes.js')
 const userRoutes = require('./src/routes/userRoutes.js')
-// const dotenv = require('dotenv');
-const connectToDb  = require('./app/services/dbSync.js');
-// dotenv.config();
-
+const sequelize  = require('./app/services/dbSync.js');
+const { confirmAuth } = require('./middelware/authMiddleWare.js')
+dotenv.config();
+/**
+ * *Description* runApp() is the function that will start up our App
+ */
 const runApp = async () => {
     app.use(bodyParse.json());
     app.use(bodyParse.urlencoded({
         extended: true
     }));
-
+    app.use(confirmAuth);
+    app.use('/auth',authRoutes);
     app.use('/NasaApi',roverRoutes);
     app.use('/users',userRoutes);
-    // app.use('/auth',nasaRoutes);
-    
+
     try {
-        await connectToDb();
+        await sequelize.sync({force: true});
         app.listen(8000, () => {
             console.log('App started...' + 8000);
         })

@@ -5,14 +5,15 @@ const User = require('../../app/models/userModel.js');
 const { getAllUsers,getUserById,createUser,updateUser,removeUser} =
 require('../../app/controllers/usersController');
 
-router.get('/all-rovers', async (req,res) => {
+router.get('/all-users', async (req,res) => {
    try {
-    const allRovers = await getAllUsers();
-    if(!allRovers)
+    console.log('hola')
+    const allUsers = await getAllUsers();
+    if(!allUsers)
         res.status(502).json('ERROR AT BRING DATA');
     else{
-        console.log('BRINGING ROVERS...')
-        res.status(200).json(allRovers);
+        console.log('BRINGING USERS...')
+        res.status(200).json(allUsers);
     }
         
     } catch (error) {
@@ -20,56 +21,56 @@ router.get('/all-rovers', async (req,res) => {
     } 
 })
 
-router.get('/rover/:roverId', async (req,res) => {
+router.get('/user/:userId', async (req,res) => {
     try {
-     const rover = await getUserById(req.params.id);
-     if(!rover)
+     const user = await getUserById(req.params.userId);
+     if(!user)
          res.status(502).json('ERROR AT BRING DATA');
      else{
-         console.log('BRINGING ROVER...')
-         res.status(200).json(rover);
+         console.log('BRINGING USER...')
+         res.status(200).json(user);
      }   
      } catch (error) {
          res.status(500).json('SERVER ERROR 500..')
      } 
  })
 
- router.post('/createRover', async (req,res) => {
+ router.post('/createUser', async (req,res) => {
     try {
-     const newRover = await createUser(req.body);
-     if(!newRover)
+     const newUser = await createUser(req.body);
+     if(!newUser)
          res.status(502).json('ERROR AT CREATE DATA');
      else{
-         console.log('CREATING ROVER...')
-         res.status(200).json(newRover);
+         console.log('CREATING USER...')
+         res.status(200).json(newUser);
      }   
      } catch (error) {
          res.status(500).json('SERVER ERROR 500..')
      } 
  })
 
- router.put('/changeRover/:roverId', async (req,res) => {
+ router.put('/changeUser/:userId', async (req,res) => {
     try {
-     const RoverToChange = await updateUser(req.body);
-     if(!RoverToChange)
+     const UserToChange = await updateUser(req.params.userId,req.body);
+     if(!UserToChange)
          res.status(502).json('ERROR AT UPDATE DATA');
      else{
-         console.log('UPDATING ROVER...')
-         res.status(200).json(RoverToChange);
+         console.log('UPDATING USER...')
+         res.status(200).json(UserToChange);
      }   
      } catch (error) {
          res.status(500).json('SERVER ERROR 500..')
      } 
  })
 
- router.put('/remove/:roverId', async (req,res) => {
+ router.delete('/remove/:userId', async (req,res) => {
     try {
-     const RoverToDelete = await removeUser(req.params.id);
-     if(!RoverToDelete)
+     const UserToDelete = await removeUser(req.params.id);
+     if(!UserToDelete)
          res.status(502).json('ERROR AT DELETE DATA');
      else{
-         console.log('DELETING ROVER...')
-         res.status(200).json(RoverToDelete);
+         console.log('DELETING USER...')
+         res.status(200).json(UserToDelete);
      }   
      } catch (error) {
          res.status(500).json('SERVER ERROR 500..')

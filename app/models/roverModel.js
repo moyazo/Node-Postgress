@@ -1,23 +1,29 @@
 'use strict'
-const mongoose = require('mongoose');
-const roverSchema = new mongoose.Schema({
-    "photo_id":{
-        type: Number,
-        required: true
+const Sequelize = require('sequelize');
+const db = require('../services/dbSync')
+const roverSchema = db.define('rovers',{
+    id: {
+        type: Sequelize.INTEGER,
+        autoIncrement: true,
+        allowNull: false,
+        primaryKey: true
     },
-    "camera_id": {
-        type: Number,
-        required: true
+    photo_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
     },
-    "camera_name": {
-        type: String,
-        required: true
+    camera_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
     },
-    "img_url": {
-        type: String,
-        required: true
+    camera_name: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+    img_url: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        
     }
-}, {collection: 'rovers'});
-const Rover = mongoose.model('Rover',roverSchema);
-
-module.exports = Rover;
+})
+module.exports = roverSchema;

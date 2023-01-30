@@ -2,48 +2,66 @@
 const User = require('../models/userModel.js');
 /**
  * *Description* Get all users of mongoDb
- * @returns {JSON}
+ * @returns User
  */
 const getAllUsers = async () => {
-    const allUsers = await User.find();
-    return allUsers;
+    return User.findAll();
 }
 /**
  * Description
  * @param {String} id
- * @returns {JSON}
+ * @returns User
  */
 const getUserById = async (id) => {
-    const UserById = await User.findById();
-    return UserById;
+    return User.findByPk(id);
+}
+/**
+ * Description
+ * @param {any} email
+ * @returns User
+ */
+const getUserByEmail = async (email) => {
+    return User.findOne(
+        {
+            where :{
+                email
+            }
+        }
+    );
 }
 /**
  * Description
  * @param {JSON} user
- * @returns {void}
+ * @returns void
  */
 const createUser  = async (user) => {
-    const newUser = await User(User);
-    return newUser.save();
+    return User.create({user});
 }
 /**
  * Description
  * @param {String} id
  * @param {any} data
- * @returns {JSON}
+ * @returns User
  */
 const updateUser = async (id, data) => { 
-    const updateEntity = User.getTaskListById(id)
-    updateEntity.updateOne(data)
-    return updateEntity
+    return User.update(data,{
+        where:{
+            id
+        }
+    });;
 }
 /**
  * Description
  * @param {String} id
- * @returns {Boolean}
+ * @returns Boolean
  */
 const removeUser = async (id) => { // DELETE ENTITY
-    await User.findByIdAndDelete(id)
+    await User.destroy({
+            where:{
+                id
+            }
+        }
+    );
     return true
 }
 
@@ -52,5 +70,6 @@ module.exports = {
     getUserById,
     createUser,
     updateUser,
-    removeUser
-};
+    removeUser,
+    getUserByEmail
+}

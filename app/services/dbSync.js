@@ -1,14 +1,17 @@
 'use strict'
 // REQUIRES
-const mongoose = require('mongoose');
-const connectToDb = async () =>{ // CONNECTED TO DB WITH MONGOOSE
-    try {
-        console.log('CONNECTING TO nasa_db');
-        await mongoose.connect('mongodb://localhost:27017/nasa_db');
-        console.log('CONNECTED TO nasa_db');
-    } catch (error) {
-        console.log(error.message);
+const Sequelize = require('sequelize');
+/**
+ * *Description* connectToDb() is a function that connect with our mongo DB.
+ */
+const sequelize = new Sequelize(
+    'postgres',
+    'postgres',
+    'postgres',
+    {
+        host: 'localhost',
+        dialect: 'postgres'
     }
-}
-// EXPORTS
-module.exports = connectToDb;
+)
+
+module.exports = sequelize;
