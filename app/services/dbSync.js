@@ -5,11 +5,12 @@ const Sequelize = require('sequelize');
  * *Description* connectToDb() is a function that connect with our mongo DB.
  */
 const sequelize = new Sequelize(
-    'postgres',
-    'postgres',
-    'postgres',
+    // USER ,DB AND PASSWORD ARE postgres
+    process.env.USER,
+    process.env.DB,
+    process.env.PASSWORD,
     {
-        host: 'localhost',
+        host: process.env.HOST,
         dialect: 'postgres'
     }
 )
