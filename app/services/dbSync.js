@@ -6,9 +6,9 @@ const Sequelize = require('sequelize');
  */
 const sequelize = new Sequelize(
     // USER ,DB AND PASSWORD ARE postgres
-    process.env.USER,
-    process.env.DB,
-    process.env.PASSWORD,
+    'postgres',
+    'postgres',
+    'postgres',
     {
         host: process.env.HOST,
         dialect: 'postgres'

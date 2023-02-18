@@ -29,7 +29,7 @@ router.get('/all-rovers', async (req,res) => {
         res.status(502).json('ERROR AT BRING DATA');
     else{
         console.log('BRINGING ROVERS...')
-        res.status(200).json('BRINGING ROVERS...');
+        res.status(200).json(allRovers);
     }
 
     } catch (error) {

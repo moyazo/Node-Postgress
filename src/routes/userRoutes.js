@@ -65,7 +65,7 @@ router.get('/user/:userId', async (req,res) => {
 
  router.delete('/remove/:userId', async (req,res) => {
     try {
-     const UserToDelete = await removeUser(req.params.id);
+     const UserToDelete = await removeUser(req.params.userId);
      if(!UserToDelete)
          res.status(502).json('ERROR AT DELETE DATA');
      else{
