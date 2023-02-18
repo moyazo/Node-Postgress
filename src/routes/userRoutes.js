@@ -27,7 +27,7 @@ router.get('/user/:userId', async (req,res) => {
      if(!user)
          res.status(502).json('ERROR AT BRING DATA');
      else{
-         console.log('BRINGING USER...')
+        //  console.log('BRINGING USER...')
          res.status(200).json(user);
      }   
      } catch (error) {

@@ -48,7 +48,7 @@ router.get('/rover/:roverId', async (req,res) => {
          res.status(502).json('ERROR AT BRING DATA');
      else{
          console.log('BRINGING ROVER...')
-         res.status(200).json('BRINGING ROVER...');
+         res.status(200).json(rover);
      }   
      } catch (error) {
          res.status(500).json('SERVER ERROR 500..')
