@@ -19,6 +19,10 @@ const userSchema = db.define('users',{
     password: {
         type: Sequelize.STRING,
         allowNull: false,
+    },
+    remember_token: {
+        type: Sequelize.STRING,
+        allowNull: true,
     }
 })
 

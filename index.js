@@ -3,11 +3,12 @@ const express = require('express');
 const bodyParse = require('body-parser');
 const dotenv = require('dotenv');
 const app = express();
+const cors = require('cors')
 const authRoutes = require('./src/routes/authRoutes.js')
 const roverRoutes = require('./src/routes/roverRoutes.js')
 const userRoutes = require('./src/routes/userRoutes.js')
 const sequelize  = require('./app/services/dbSync.js');
-const { confirmAuth } = require('./middelware/authMiddleWare.js')
+const { confirmAuth } = require('./middelware/middleware.js')
 dotenv.config();
 /**
  * *Description* runApp() is the function that will start up our App
@@ -17,6 +18,7 @@ const runApp = async () => {
     app.use(bodyParse.urlencoded({
         extended: true
     }));
+    app.use(cors());
     app.use(confirmAuth);
     app.use('/auth',authRoutes);
     app.use('/NasaApi',roverRoutes);

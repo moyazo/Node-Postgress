@@ -5,7 +5,11 @@ const Rover = require('../models/roverModel.js');
  * @returns Rover
  */
 const getAllRovers = async () => {
-    return Rover.findAll();
+    return Rover.findAll({
+        // order:[
+        //     ['id','ASC']
+        // ]
+    });
 }
 /**
  * Description
@@ -13,7 +17,8 @@ const getAllRovers = async () => {
  * @returns Rover
  */
 const getRoverById = async (id) => {
-    return Rover.findByPk(id);
+    const rover = await Rover.findByPk(id);
+    return rover;
 }
 /**
  * Description
@@ -21,7 +26,7 @@ const getRoverById = async (id) => {
  * @returns void
  */
 const createRover  = async (rover) => {
-    return Rover.create({rover});
+    return Rover.create(rover);
 }
 /**
  * Description
@@ -30,11 +35,13 @@ const createRover  = async (rover) => {
  * @returns Rover
  */
 const updateRover = async (id, data) => { 
-    return Rover.update(data,{
+    const rover = await Rover.update(data,{
         where:{
             id
         }
     });
+    console.log(rover)
+    return rover
 }
 /**
  * Description

@@ -25,7 +25,7 @@ async function getDataFromApi () {
         }    
         itemsToCreate.forEach(async item => {
             await Rover.create(item);
-        });clera
+        });
     }
     catch (error) {
         console.log('ERROR AL LLAMAR A LA ApiNasa',error.message);
